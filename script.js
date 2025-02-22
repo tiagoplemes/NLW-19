@@ -71,6 +71,7 @@ const showInvite = (userForm) => {
             </p>
         </section>
     `
+    app.setAttribute("class", "page-invite")
     updateImageLogo()
 }
 
@@ -99,7 +100,7 @@ const formAction = () => {
 const updateImageLogo = () => {
     document.querySelectorAll('img').forEach((img) => {
         const src = img.getAttribute('src');  // Obtém o caminho original da imagem
-        const newSrc = `img/${src}`;  // Adiciona o caminho relativo da pasta img
+        const newSrc = src.search("img") ? `img/${src}` : src;  // Adiciona o caminho relativo da pasta img
         img.setAttribute('src', newSrc);  // Substitui o src pela nova URL
     })
 }
@@ -166,4 +167,4 @@ const startApp = () => {
 
 startApp()
 
-document.getElementById("logo").onclick = () => startApp()
+document.querySelector("header").onclick = () => startApp()
