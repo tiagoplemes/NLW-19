@@ -34,6 +34,17 @@ const getTotalSubscribers = (userForm) => {
     return subs.length
 }
 
+const saveUser = (userForm) => {
+    const newUser = {
+        ...userForm,
+        ref: Math.round(Math.random() * 50000),
+        refBy: 100
+    }
+
+    users.push(newUser)
+    return newUser
+}
+
 const showInvite = (userForm) => {
     app.innerHTML = `
         <input type="text" id="link" value="https://evento.com?ref=${userForm.ref}"
@@ -64,7 +75,8 @@ const formAction = () => {
         if(user){
             showInvite(user)
         }else{ 
-            alert("Não achei")
+            const newUser =  saveUser(userForm)
+            showInvite(newUser)
         }
     }
 }
@@ -86,5 +98,6 @@ const startApp = () => {
     formAction()
 }
 
-
 startApp()
+
+document.getElementById("logo").onclick = () => startApp()
